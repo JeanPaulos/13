@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ontwerpformulier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-section {
+            margin-bottom: 30px;
+        }
+        .centered {
+            display: flex;
+            align-items: center;
+        }
+        img {
+            margin-right: 20px;
+        }
+        .color-box {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border: 2px solid transparent;
+            cursor: pointer;
+            margin: 2px;
+        }
+        .color-box.selected {
+            border-color: black;
+        }
+        .color-palette {
+            display: none;
+            margin-top: 10px;
+        }
+        .color-toggle {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .submit-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ontwerpformulier College Vest</h1>
+    <form action="verwerk_formulier.php" method="POST" enctype="multipart/form-data">
+        <!-- Sectie 1: Bestelnummer -->
+        <div class="form-section">
+            <label for="bestelnummer">Bestelnummer:</label>
+            <input type="text" id="bestelnummer" name="bestelnummer" required>
+        </div>
+        
+        <div>
+<!-- Sectie 2: Keuze van de maat voor het College Vest -->
+<h2>Maatkeuze</h2>
+
+<label for="maat">Kies uw maat:</label>
+<select id="maat" name="maat" required>
+    <option value="" disabled selected>Selecteer een maat</option>
+    <option value="XS">XS</option>
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+    <option value="XXL">XXL</option>
+</select>
+
+<h3>Maattabel:</h3>
+<h3>Maattabel:</h3>
+<table style="width: 50%; border-collapse: collapse; margin-top: 10px; text-align: center;">
+    <thead style="background-color: #f2f2f2;">
+        <tr>
+          <th style="padding: 10px; border: 1px solid #ddd;">Maat</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">XS</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">S</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">M</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">L</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">XL</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">XXL</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ddd;">Breedte (cm)</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">44</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">48</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">52</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">56</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">60</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">64</td>
+        </tr>
+        <tr style="background-color: #f9f9f9;">
+          <td style="padding: 10px; border: 1px solid #ddd;">Lengte (cm)</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">62</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">65</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">68</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">71</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">74</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">77</td>
+        </tr>
+    </tbody>
+</table>
+
+</div>        
+
+        <!-- Sectie 2: Ontwerp Voorkant -->
+        <div class="form-section">
+            <h2>Ontwerp Voorkant</h2>
+            <p>Je kunt hier jouw ontwerp voor de voorzijde invoeren. Je kunt kiezen tussen het invoeren van een tekst, of het uploaden van een afbeelding. <br>
+            De voorkant wordt bedrukt op borstlogo formaat. Ongeveer 10-11 cm breed.</p>
+            <div class="centered">
+                <img src="https://www.bedrukt.nl/bol/form-v.jpg" alt="Upload voorbeeld borstlogo ontwerp" width="300" height="300" border="0">
+                <div>
+                    <label>Kies ontwerp voorkant:</label>
+                    <input type="radio" id="textVoorkant" name="voorkantKeuze" value="tekst" onClick="toggleVoorkantOptions()" checked>
+                    <label for="textVoorkant">Tekst</label>
+                    <input type="radio" id="uploadVoorkant" name="voorkantKeuze" value="upload" onClick="toggleVoorkantOptions()">
+                    <label for="uploadVoorkant">Upload afbeelding</label>
+
+                    <div id="voorkantTekstOpties">
+                        <label for="voorkantTekst">Tekst voor voorkant:</label>
+                        <input type="text" id="voorkantTekst" name="voorkantTekst">
+
+                        <label for="voorkantFont">Font:</label>
+                        <select id="voorkantFont" name="voorkantFont">
+                            <option value="Acme" style="font-family: 'Acme', sans-serif;">Acme</option>
+                            <option value="Titan One" style="font-family: 'Titan One', cursive;">Titan One</option>
+                            <option value="Peralta" style="font-family: 'Peralta', cursive;">Peralta</option>
+                            <option value="Margarine" style="font-family: 'Margarine', cursive;">Margarine</option>
+                            <option value="Bowlby One" style="font-family: 'Bowlby One', cursive;">Bowlby One</option>
+                            <option value="Rammetto One" style="font-family: 'Rammetto One', cursive;">Rammetto One</option>
+                            <option value="Ranchers" style="font-family: 'Ranchers', cursive;">Ranchers</option>
+                            <option value="Sigmar One" style="font-family: 'Sigmar One', cursive;">Sigmar One</option>
+                            <option value="Courgette" style="font-family: 'Courgette', cursive;">Courgette</option>
+                            <option value="Pacifico" style="font-family: 'Pacifico', cursive;">Pacifico</option>
+                            <option value="Fredoka One" style="font-family: 'Fredoka One', cursive;">Fredoka One</option>
+                            <option value="Amatic SC" style="font-family: 'Amatic SC', cursive;">Amatic SC</option>
+                            <option value="Indie Flower" style="font-family: 'Indie Flower', cursive;">Indie Flower</option>
+                            <option value="Bangers" style="font-family: 'Bangers', cursive;">Bangers</option>
+                            <option value="Lobster" style="font-family: 'Lobster', cursive;">Lobster</option>
+                            <option value="Anton" style="font-family: 'Anton', sans-serif;">Anton</option>
+                            <option value="Doppio One" style="font-family: 'Doppio One', cursive;">Doppio One</option>
+                            <option value="Lemon" style="font-family: 'Lemon', cursive;">Lemon</option>
+                            <option value="Lato" style="font-family: 'Lato', sans-serif;">Lato</option>
+                            <option value="Racing Sans One" style="font-family: 'Racing Sans One', sans-serif;">Racing Sans One</option>
+                        </select>
+
+                        <button type="button" class="color-toggle" onClick="toggleColorPalette('voorkant')">Kies Kleur</button>
+                        <div class="color-palette" id="voorkantColorPalette">
+                            <div class="color-box" style="background-color: #A2F2D5;" onClick="setKleur('#A2F2D5', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #4B1B00;" onClick="setKleur('#4B1B00', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #FAEED1;" onClick="setKleur('#FAEED1', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #FFA6D9;" onClick="setKleur('#FFA6D9', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #E2007A;" onClick="setKleur('#E2007A', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #C33259;" onClick="setKleur('#C33259', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #473782;" onClick="setKleur('#473782', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #141754;" onClick="setKleur('#141754', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #0000FF;" onClick="setKleur('#0000FF', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #009EE0;" onClick="setKleur('#009EE0', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #ADC9EE;" onClick="setKleur('#ADC9EE', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #09A3A9;" onClick="setKleur('#09A3A9', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #007D44;" onClick="setKleur('#007D44', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #86D15C;" onClick="setKleur('#86D15C', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #FFED6F;" onClick="setKleur('#FFED6F', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #F3F3F3;" onClick="setKleur('#F3F3F3', 'voorkant')"></div>
+                            <div class="color-box" style="background-color: #000000;" onClick="setKleur('#000000', 'voorkant')"></div>
+                        </div>
+                        <input type="hidden" id="voorkantKleur" name="voorkantKleur">
+                    </div>
+
+                    <div id="voorkantUploadOpties" style="display: none;">
+                        <label for="voorkantAfbeelding">Upload afbeelding voor voorkant:</label>
+                        <input type="file" id="voorkantAfbeelding" name="voorkantAfbeelding" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sectie 3: Ontwerp Achterkant -->
+        <div class="form-section">
+            <h2>Ontwerp Achterkant</h2>
+            <p>Je kunt hier jouw ontwerp voor de achterzijde invoeren. Je kunt kiezen tussen het invoeren van een tekst, of het uploaden van een afbeelding. <br>
+            De achterkant wordt bedrukt op ruglogo formaat. Ongeveer 30-31 cm breed.</p>
+            <div class="centered">
+                <img src="https://www.bedrukt.nl/bol/form-a.jpg" alt="Upload voorbeeld ruglogo ontwerp" width="300" height="300" border="0">
+          <div>
+                    <label>Kies ontwerp achterkant:</label>
+                    <input type="radio" id="textAchterkant" name="achterkantKeuze" value="tekst" onClick="toggleAchterkantOptions()" checked>
+                    <label for="textAchterkant">Tekst</label>
+                    <input type="radio" id="uploadAchterkant" name="achterkantKeuze" value="upload" onClick="toggleAchterkantOptions()">
+                    <label for="uploadAchterkant">Upload</label>
+                    afbeelding
+                    <div id="achterkantTekstOpties">
+                        <label for="achterkantTekst">Tekst voor achterkant:</label>
+                        <input type="text" id="achterkantTekst" name="achterkantTekst">
+
+                        <label for="achterkantFont">Font:</label>
+                        <select id="achterkantFont" name="achterkantFont">
+                            <option value="Acme" style="font-family: 'Acme', sans-serif;">Acme</option>
+                            <option value="Titan One" style="font-family: 'Titan One', cursive;">Titan One</option>
+                            <option value="Peralta" style="font-family: 'Peralta', cursive;">Peralta</option>
+                            <option value="Margarine" style="font-family: 'Margarine', cursive;">Margarine</option>
+                            <option value="Bowlby One" style="font-family: 'Bowlby One', cursive;">Bowlby One</option>
+                            <option value="Rammetto One" style="font-family: 'Rammetto One', cursive;">Rammetto One</option>
+                            <option value="Ranchers" style="font-family: 'Ranchers', cursive;">Ranchers</option>
+                            <option value="Sigmar One" style="font-family: 'Sigmar One', cursive;">Sigmar One</option>
+                            <option value="Courgette" style="font-family: 'Courgette', cursive;">Courgette</option>
+                            <option value="Pacifico" style="font-family: 'Pacifico', cursive;">Pacifico</option>
+                            <option value="Fredoka One" style="font-family: 'Fredoka One', cursive;">Fredoka One</option>
+                            <option value="Amatic SC" style="font-family: 'Amatic SC', cursive;">Amatic SC</option>
+                            <option value="Indie Flower" style="font-family: 'Indie Flower', cursive;">Indie Flower</option>
+                            <option value="Bangers" style="font-family: 'Bangers', cursive;">Bangers</option>
+                            <option value="Lobster" style="font-family: 'Lobster', cursive;">Lobster</option>
+                            <option value="Anton" style="font-family: 'Anton', sans-serif;">Anton</option>
+                            <option value="Doppio One" style="font-family: 'Doppio One', cursive;">Doppio One</option>
+                            <option value="Lemon" style="font-family: 'Lemon', cursive;">Lemon</option>
+                            <option value="Lato" style="font-family: 'Lato', sans-serif;">Lato</option>
+                            <option value="Racing Sans One" style="font-family: 'Racing Sans One', sans-serif;">Racing Sans One</option>
+                        </select>
+
+                        <button type="button" class="color-toggle" onClick="toggleColorPalette('achterkant')">Kies Kleur</button>
+                        <div class="color-palette" id="achterkantColorPalette">
+                            <div class="color-box" style="background-color: #A2F2D5;" onClick="setKleur('#A2F2D5', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #4B1B00;" onClick="setKleur('#4B1B00', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #FAEED1;" onClick="setKleur('#FAEED1', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #FFA6D9;" onClick="setKleur('#FFA6D9', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #E2007A;" onClick="setKleur('#E2007A', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #C33259;" onClick="setKleur('#C33259', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #473782;" onClick="setKleur('#473782', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #141754;" onClick="setKleur('#141754', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #0000FF;" onClick="setKleur('#0000FF', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #009EE0;" onClick="setKleur('#009EE0', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #ADC9EE;" onClick="setKleur('#ADC9EE', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #09A3A9;" onClick="setKleur('#09A3A9', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #007D44;" onClick="setKleur('#007D44', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #86D15C;" onClick="setKleur('#86D15C', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #FFED6F;" onClick="setKleur('#FFED6F', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #F3F3F3;" onClick="setKleur('#F3F3F3', 'achterkant')"></div>
+                            <div class="color-box" style="background-color: #000000;" onClick="setKleur('#000000', 'achterkant')"></div>
+                        </div>
+                        <input type="hidden" id="achterkantKleur" name="achterkantKleur">
+                    </div>
+
+                    <div id="achterkantUploadOpties" style="display: none;">
+                        <label for="achterkantAfbeelding">Upload afbeelding voor achterkant:</label>
+                        <input type="file" id="achterkantAfbeelding" name="achterkantAfbeelding" accept="image/*">
+                    </div>
+                </div>
+            </div>
+      </div>
+
+        <!-- Sectie 4: Voorwaarden -->
+        <div class="form-section">
+            <label>
+                <input type="checkbox" name="voorwaarden" required> Ik ga akkoord met de <a href="https://www.bedrukt.nl/algemene-voorwaarden/" target="_blank">voorwaarden</a>. Het indienen van een ontwerp is definitief, maar er zal nog een voorbeeld worden gestuurd.            </label>
+            <br>
+        Het herroepingsrechts is wettelijk uitgesloten. Gepersonaliseerde artikelen kunnen niet worden geretourneerd of geruild.</div>
+
+        <!-- Verzendknop -->
+        <div class="form-section">
+            <button type="submit" class="submit-btn">Verzend</button>
+        </div>
+    </form>
+
+    <script>
+        // Vul het bestelnummer in vanuit de URL
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return null;
+        }
+
+        document.getElementById('bestelnummer').value = getQueryVariable('bestelnummer');
+		
+        function toggleVoorkantOptions() {
+            var voorkantKeuze = document.querySelector('input[name="voorkantKeuze"]:checked').value;
+            document.getElementById('voorkantTekstOpties').style.display = voorkantKeuze === 'tekst' ? 'block' : 'none';
+            document.getElementById('voorkantUploadOpties').style.display = voorkantKeuze === 'upload' ? 'block' : 'none';
+        }
+
+        function toggleAchterkantOptions() {
+            var achterkantKeuze = document.querySelector('input[name="achterkantKeuze"]:checked').value;
+            document.getElementById('achterkantTekstOpties').style.display = achterkantKeuze === 'tekst' ? 'block' : 'none';
+            document.getElementById('achterkantUploadOpties').style.display = achterkantKeuze === 'upload' ? 'block' : 'none';
+        }
+
+        function toggleColorPalette(positie) {
+            var palette = document.getElementById(positie + 'ColorPalette');
+            palette.style.display = palette.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function setKleur(kleur, positie) {
+            document.getElementById(positie + 'Kleur').value = kleur; // Bewaar de geselecteerde kleur
+            var boxes = document.querySelectorAll('#' + positie + 'ColorPalette .color-box');
+            boxes.forEach(function(box) {
+                box.classList.remove('selected'); // Verwijder selectie van alle kleurdozen
+            });
+            event.target.classList.add('selected'); // Markeer de geselecteerde kleurdoos
+        }
+    </script>
+</body>
+</html>
